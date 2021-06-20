@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+        - name: hello
+          image: hello-impl:1.0-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: management
+              containerPort: 8558
+              protocol: TCP
+            - name: http
+              containerPort: 9000
+            - name: akka-remote
+              containerPort: 10001
+            - name: akka-mgmt-http
+              containerPort: 10003
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-stream
+  labels:
+    app: hello-stream
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-stream
+  template:
+    metadata:
+      labels:
+        app: hello-stream
+    spec:
+      containers:
+        - name: hello-stream
+          image: hello-stream-impl:1.0-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: management
+              containerPort: 8558
+              protocol: TCP
+            - name: http
+              containerPort: 9001
+            - name: akka-remote
+              containerPort: 10002
+            - name: akka-mgmt-http
+              containerPort: 10004
