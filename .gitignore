@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 target
 ideatarget
 .target
@@ -11,3 +12,7 @@ bin
 .factorypath
 .settings
 logs
+=======
+*.class
+*.log
+>>>>>>> 9a23eb5c01563b0cb92110631c9445bf8b563499
