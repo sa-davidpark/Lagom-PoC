@@ -51,7 +51,7 @@
     <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-akka-management-scaladsl_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-api_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-client_2.13:1.6.5:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-cluster-core_2.13:1.6.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-cluster-core_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-core-testkit_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-dev-mode-ssl-support_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-kafka-broker_2.13:1.6.5:jar" level="project" />
@@ -65,7 +65,7 @@
     <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-scaladsl-api_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-scaladsl-broker_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-scaladsl-client_2.13:1.6.5:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-scaladsl-cluster_2.13:1.6.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-scaladsl-cluster_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.lightbend.lagom:lagom-scaladsl-dev-mode_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-scaladsl-kafka-broker_2.13:1.6.5:jar" level="project" />
     <orderEntry type="library" scope="TEST" name="sbt: com.lightbend.lagom:lagom-scaladsl-kafka-client_2.13:1.6.5:jar" level="project" />
@@ -83,7 +83,7 @@
     <orderEntry type="library" scope="TEST" name="sbt: com.typesafe.akka:akka-actor-testkit-typed_2.13:2.6.14:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-actor-typed_2.13:2.6.14:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-actor_2.13:2.6.14:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: com.typesafe.akka:akka-cluster-sharding-typed_2.13:2.6.14:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.typesafe.akka:akka-cluster-sharding-typed_2.13:2.6.14:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-cluster-sharding_2.13:2.6.14:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-cluster-tools_2.13:2.6.14:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-cluster-typed_2.13:2.6.14:jar" level="project" />

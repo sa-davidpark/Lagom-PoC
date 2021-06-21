@@ -56,6 +56,7 @@ lazy val `hello-stream-impl` = (project in file("hello-stream-impl"))
     libraryDependencies ++= Seq(
       lagomScaladslTestKit,
       lagomScaladslAkkaDiscovery,
+      lagomScaladslCluster,
       "com.lightbend.akka.management" %% "akka-management-cluster-http" % AkkaManagementVersion,
       "com.lightbend.akka.management" %% "akka-management-cluster-bootstrap" % AkkaManagementVersion,
       "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % AkkaManagementVersion,
