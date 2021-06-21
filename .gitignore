@@ -3,6 +3,7 @@ target
 ideatarget
 .target
 bin
+.idea
 .cache
 .cache-main
 .cache-tests

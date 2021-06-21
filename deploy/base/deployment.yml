@@ -18,6 +18,15 @@ spec:
         - name: hello
           image: hello-impl:1.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
+          env:
+            - name: CASSANDRA_SERVICE_NAME
+              value: _cql._tcp.cassandra.default.svc.cluster.local
+            - name: CASSANDRA_USERNAME
+              value: cassandra
+            - name: CASSANDRA_PASSWORD
+              value: <password that came with creating the cassandra cluster>
+            - name: KAFKA_SERVICE_NAME
+              value: _tcp-clients._tcp.strimzi-kafka-brokers.kafka.svc.cluster.local
           ports:
             - name: management
               containerPort: 8558
