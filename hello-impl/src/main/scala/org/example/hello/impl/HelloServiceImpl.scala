@@ -1,26 +1,25 @@
 package org.example.hello.impl
 
-import org.example.hello.api
-import org.example.hello.api.HelloService
-import akka.Done
-import akka.NotUsed
-import akka.cluster.sharding.typed.scaladsl.ClusterSharding
-import akka.cluster.sharding.typed.scaladsl.EntityRef
+import akka.{Done, NotUsed}
+import akka.cluster.sharding.typed.scaladsl.{ClusterSharding, EntityRef}
+import akka.util.Timeout
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.api.broker.Topic
-import com.lightbend.lagom.scaladsl.broker.TopicProducer
-import com.lightbend.lagom.scaladsl.persistence.EventStreamElement
-import com.lightbend.lagom.scaladsl.persistence.PersistentEntityRegistry
-
-import scala.concurrent.ExecutionContext
-import scala.concurrent.duration._
-import akka.util.Timeout
 import com.lightbend.lagom.scaladsl.api.transport.BadRequest
+import com.lightbend.lagom.scaladsl.broker.TopicProducer
+import com.lightbend.lagom.scaladsl.persistence.{EventStreamElement, PersistentEntityRegistry}
+import org.example.hello.api
+import org.example.hello.api.HelloService
+import org.example.hello.impl.readside.GreetingsRepository
+
+import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * Implementation of the HelloService.
   */
 class HelloServiceImpl(
+  greetingsRepository: GreetingsRepository,
   clusterSharding: ClusterSharding,
   persistentEntityRegistry: PersistentEntityRegistry
 )(implicit ec: ExecutionContext)
@@ -60,7 +59,7 @@ class HelloServiceImpl(
       }
   }
 
-  override def greetingsTopic(): Topic[api.GreetingMessageChanged] =
+  override def greetingsTopic(): Topic[api.Greeting] =
     TopicProducer.singleStreamWithOffset { fromOffset =>
       persistentEntityRegistry
         .eventStream(HelloEvent.Tag, fromOffset)
@@ -69,10 +68,14 @@ class HelloServiceImpl(
 
   private def convertEvent(
     helloEvent: EventStreamElement[HelloEvent]
-  ): api.GreetingMessageChanged = {
+  ): api.Greeting = {
     helloEvent.event match {
       case GreetingMessageChanged(msg) =>
-        api.GreetingMessageChanged(helloEvent.entityId, msg)
+        api.Greeting(helloEvent.entityId, msg)
     }
+  }
+
+  override def allGreetings() = ServiceCall { request =>
+    greetingsRepository.getAll()
   }
 }

@@ -3,6 +3,7 @@ version in ThisBuild := "1.0-SNAPSHOT"
 
 // the Scala version that will be used for cross-compiled libraries
 scalaVersion in ThisBuild := "2.13.0"
+lagomCassandraCleanOnStart in ThisBuild := true
 
 javaOptions in Universal ++= Seq(
   "-Dpidfile.path=/dev/null"

@@ -29,11 +29,13 @@ trait HelloService extends Service {
     */
   def useGreeting(id: String): ServiceCall[GreetingMessage, Done]
 
+  def allGreetings(): ServiceCall[NotUsed, Seq[Greeting]]
+
 
   /**
     * This gets published to Kafka.
     */
-  def greetingsTopic(): Topic[GreetingMessageChanged]
+  def greetingsTopic(): Topic[Greeting]
 
   override final def descriptor: Descriptor = {
     import Service._
@@ -41,7 +43,8 @@ trait HelloService extends Service {
     named("hello")
       .withCalls(
         pathCall("/api/hello/:id", hello _),
-        pathCall("/api/hello/:id", useGreeting _)
+        pathCall("/api/hello/:id", useGreeting _),
+        namedCall("/api/greetings", allGreetings)
       )
       .withTopics(
         topic(HelloService.TOPIC_NAME, greetingsTopic _)
@@ -52,7 +55,7 @@ trait HelloService extends Service {
           // name as the partition key.
           .addProperty(
             KafkaProperties.partitionKeyStrategy,
-            PartitionKeyStrategy[GreetingMessageChanged](_.name)
+            PartitionKeyStrategy[Greeting](_.name)
           )
       )
       .withAutoAcl(true)
@@ -75,18 +78,27 @@ object GreetingMessage {
 }
 
 
+//
+///**
+//  * The greeting message class used by the topic stream.
+//  * Different than [[GreetingMessage]], this message includes the name (id).
+//  */
+//case class GreetingMessageChanged(name: String, message: String)
+//
+//object GreetingMessageChanged {
+//  /**
+//    * Format for converting greeting messages to and from JSON.
+//    *
+//    * This will be picked up by a Lagom implicit conversion from Play's JSON format to Lagom's message serializer.
+//    */
+//  implicit val format: Format[GreetingMessageChanged] = Json.format[GreetingMessageChanged]
+//}
 
 /**
-  * The greeting message class used by the topic stream.
-  * Different than [[GreetingMessage]], this message includes the name (id).
+  * The Greeting is both the message and the person that message is meant for.
   */
-case class GreetingMessageChanged(name: String, message: String)
+case class Greeting(name: String, message: String)
 
-object GreetingMessageChanged {
-  /**
-    * Format for converting greeting messages to and from JSON.
-    *
-    * This will be picked up by a Lagom implicit conversion from Play's JSON format to Lagom's message serializer.
-    */
-  implicit val format: Format[GreetingMessageChanged] = Json.format[GreetingMessageChanged]
+object Greeting {
+  implicit val format: Format[Greeting] = Json.format[Greeting]
 }
