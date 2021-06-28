@@ -3,11 +3,19 @@ version in ThisBuild := "1.0-SNAPSHOT"
 
 // the Scala version that will be used for cross-compiled libraries
 scalaVersion in ThisBuild := "2.13.0"
-lagomCassandraCleanOnStart in ThisBuild := true
 
 javaOptions in Universal ++= Seq(
   "-Dpidfile.path=/dev/null"
 )
+
+lagomCassandraEnabled in ThisBuild := false
+lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "tcp://localhost:9042")
+lagomCassandraCleanOnStart in ThisBuild := true
+lagomCassandraPort in ThisBuild := 9042
+//
+lagomKafkaEnabled in ThisBuild := false
+lagomKafkaAddress in ThisBuild := "localhost:9092"
+//lagomKafkaPropertiesFile in ThisBuild := Some((baseDirectory in ThisBuild).value / "project" / "kafka-server.properties")
 
 val AkkaVersion = "2.6.14"
 val AkkaManagementVersion = "1.1.0"

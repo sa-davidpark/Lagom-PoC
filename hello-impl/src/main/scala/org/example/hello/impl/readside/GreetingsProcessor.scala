@@ -14,9 +14,8 @@ class GreetingsProcessor(session: CassandraSession, readSide: CassandraReadSide)
 
   private val createTableCql =
     "CREATE TABLE IF NOT EXISTS greeting (" +
-      "\n    name text," +
-      "\n    message text," +
-      "\n    PRIMARY KEY (name)" +
+      "\n    name text PRIMARY KEY," +
+      "\n    message text" +
       "\n)"
 
   // This is a convenience for creating the read-side table in development mode.
@@ -48,7 +47,7 @@ class GreetingsProcessor(session: CassandraSession, readSide: CassandraReadSide)
   override def buildHandler() =
     readSide
       .builder[HelloEvent]("GreetingsReadSideOffset")
-      .setGlobalPrepare(() => buildTables)
+//      .setGlobalPrepare(() => buildTables)
       .setPrepare(_ => prepareWriteGreeting())
       .setEventHandler(processGreetingMessageChanged)
       .build()

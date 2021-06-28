@@ -1,8 +1,8 @@
 package org.example.hello.impl
 
-import akka.{Done, NotUsed}
 import akka.cluster.sharding.typed.scaladsl.{ClusterSharding, EntityRef}
 import akka.util.Timeout
+import akka.{Done, NotUsed}
 import com.lightbend.lagom.scaladsl.api.ServiceCall
 import com.lightbend.lagom.scaladsl.api.broker.Topic
 import com.lightbend.lagom.scaladsl.api.transport.BadRequest
@@ -12,8 +12,8 @@ import org.example.hello.api
 import org.example.hello.api.HelloService
 import org.example.hello.impl.readside.GreetingsRepository
 
+import scala.concurrent.ExecutionContext
 import scala.concurrent.duration._
-import scala.concurrent.{ExecutionContext, Future}
 
 /**
   * Implementation of the HelloService.

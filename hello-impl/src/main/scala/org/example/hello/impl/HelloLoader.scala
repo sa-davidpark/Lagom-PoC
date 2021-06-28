@@ -35,7 +35,7 @@ abstract class HelloApplication(context: LagomApplicationContext)
   override lazy val lagomServer: LagomServer = serverFor[HelloService](wire[HelloServiceImpl])
 
   lazy val greetingsRepository = wire[GreetingsRepository]
-  readSide.register(wire[GreetingsProcessor])
+  readSide.register[HelloEvent](wire[GreetingsProcessor])
 
   // Register the JSON serializer registry
   override lazy val jsonSerializerRegistry: JsonSerializerRegistry = HelloSerializerRegistry
