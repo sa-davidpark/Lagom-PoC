@@ -4,8 +4,7 @@ import akka.Done
 import com.datastax.driver.core.{BoundStatement, PreparedStatement}
 import com.lightbend.lagom.scaladsl.persistence.cassandra.{CassandraReadSide, CassandraSession}
 import com.lightbend.lagom.scaladsl.persistence.{AggregateEventTag, EventStreamElement, ReadSideProcessor}
-import org.example.hello.api.Greeting
-import org.example.hello.impl.HelloEvent
+import org.example.hello.impl.{GreetingMessageChanged, HelloEvent}
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 
@@ -33,12 +32,12 @@ class GreetingsProcessor(session: CassandraSession, readSide: CassandraReadSide)
   }
 
   private def processGreetingMessageChanged(
-                                             eventElement: EventStreamElement[Greeting]
+                                             eventElement: EventStreamElement[GreetingMessageChanged]
                                            ): Future[List[BoundStatement]] = {
     println("Received event and adding to db")
     writeGreeting.map { ps =>
       val bindWriteGreeting = ps.bind()
-      bindWriteGreeting.setString("name", eventElement.event.name)
+      bindWriteGreeting.setString("name", eventElement.entityId)
       bindWriteGreeting.setString("message", eventElement.event.message)
       List(bindWriteGreeting)
     }
@@ -46,10 +45,10 @@ class GreetingsProcessor(session: CassandraSession, readSide: CassandraReadSide)
 
   override def buildHandler() =
     readSide
-      .builder[HelloEvent]("GreetingsReadSideOffset")
+      .builder[HelloEvent]("GreetingsReadSideOffset1")
 //      .setGlobalPrepare(() => buildTables)
       .setPrepare(_ => prepareWriteGreeting())
-      .setEventHandler(processGreetingMessageChanged)
+      .setEventHandler[GreetingMessageChanged](processGreetingMessageChanged)
       .build()
 
   override def aggregateTags: Set[AggregateEventTag[HelloEvent]] = Set(HelloEvent.Tag)

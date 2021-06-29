@@ -10,11 +10,10 @@ javaOptions in Universal ++= Seq(
 
 lagomCassandraEnabled in ThisBuild := false
 lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "tcp://localhost:9042")
-lagomCassandraCleanOnStart in ThisBuild := true
-lagomCassandraPort in ThisBuild := 9042
+
 //
-lagomKafkaEnabled in ThisBuild := false
-lagomKafkaAddress in ThisBuild := "localhost:9092"
+//lagomKafkaEnabled in ThisBuild := false
+//lagomKafkaAddress in ThisBuild := "localhost:9092"
 //lagomKafkaPropertiesFile in ThisBuild := Some((baseDirectory in ThisBuild).value / "project" / "kafka-server.properties")
 
 val AkkaVersion = "2.6.14"

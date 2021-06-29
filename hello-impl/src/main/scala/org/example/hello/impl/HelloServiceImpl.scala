@@ -59,7 +59,7 @@ class HelloServiceImpl(
       }
   }
 
-  override def greetingsTopic(): Topic[api.Greeting] =
+  override def greetingsTopic(): Topic[api.GreetingMessageChanged] =
     TopicProducer.singleStreamWithOffset { fromOffset =>
       persistentEntityRegistry
         .eventStream(HelloEvent.Tag, fromOffset)
@@ -68,10 +68,10 @@ class HelloServiceImpl(
 
   private def convertEvent(
     helloEvent: EventStreamElement[HelloEvent]
-  ): api.Greeting = {
+  ): api.GreetingMessageChanged = {
     helloEvent.event match {
       case GreetingMessageChanged(msg) =>
-        api.Greeting(helloEvent.entityId, msg)
+        api.GreetingMessageChanged(helloEvent.entityId, msg)
     }
   }
 
