@@ -3,6 +3,7 @@ package org.example.hellostream.api
 import akka.NotUsed
 import akka.stream.scaladsl.Source
 import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
+import org.example.hello.api.GreetingMessage
 
 /**
   * The hello stream interface.
@@ -12,14 +13,14 @@ import com.lightbend.lagom.scaladsl.api.{Descriptor, Service, ServiceCall}
   */
 trait HelloStreamService extends Service {
 
-  def stream: ServiceCall[Source[String, NotUsed], Source[String, NotUsed]]
+  def establishFeed(assetId: String): ServiceCall[NotUsed, Source[GreetingMessage, NotUsed]]
 
   override final def descriptor: Descriptor = {
     import Service._
 
     named("hello-stream")
       .withCalls(
-        namedCall("stream", stream)
+        pathCall("/stream/:assetId", establishFeed _)
       ).withAutoAcl(true)
   }
 }

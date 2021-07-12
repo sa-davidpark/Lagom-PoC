@@ -179,4 +179,4 @@ CREATE TABLE hellolocal.metadata (
 CREATE TABLE hellolocal.greeting (
     name text PRIMARY KEY,
     message text
-)
+);
