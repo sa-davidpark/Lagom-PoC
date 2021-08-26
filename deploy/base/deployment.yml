@@ -14,19 +14,33 @@ spec:
       labels:
         app: hello
     spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: cassandra-config
       containers:
         - name: hello
           image: hello-impl:1.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           env:
-            - name: CASSANDRA_SERVICE_NAME
-              value: _cql._tcp.cassandra.default.svc.cluster.local
             - name: CASSANDRA_USERNAME
-              value: cassandra
+              value: tCIsebQSBkxGwnPauDZwHeez
             - name: CASSANDRA_PASSWORD
-              value: <password that came with creating the cassandra cluster>
+              value: 4ZsDZf2S1gQD1EjxLytwvOvX,gZkc1tGFzbGmkr3U8PwwRQHiUg35Fnaw.P0f_uT-BSAf_2b_Qh8DHfqcIiJDmA4R_hCo+P5U7ax+KWt70vLm5+.9A3T79YMhFtxRtvP
             - name: KAFKA_SERVICE_NAME
               value: _tcp-clients._tcp.strimzi-kafka-brokers.kafka.svc.cluster.local
+            - name: CASSANDRA_TRUSTSTORE_PATH
+              value: /cassandra/trustStore.jks
+            - name: CASSANDRA_TRUSTSTORE_PASSWORD
+              value: 12E3LFsbWP86tKgdm
+            - name: CASSANDRA_KEYSTORE_PATH
+              value: /cassandra/identity.jks
+            - name: CASSANDRA_KEYSTORE_PASSWORD
+              value: HGR5ij3Bud8q0YvQ9
+            - name: REQUIRED_CONTACT_POINT_NR
+              value: "3"
           ports:
             - name: management
               containerPort: 8558
@@ -37,6 +51,9 @@ spec:
               containerPort: 10001
             - name: akka-mgmt-http
               containerPort: 10003
+          volumeMounts:
+            - name: config-volume
+              mountPath: /cassandra
 ---
 apiVersion: apps/v1
 kind: Deployment

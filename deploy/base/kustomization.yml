@@ -5,3 +5,10 @@ resources:
   - deployment.yml
   - service.yml
   - rbac.yml
+  - network-policy.yml
+
+configMapGenerator:
+  - name: cassandra-config
+    files:
+      - ./cassandra/trustStore.jks
+      - ./cassandra/identity.jks
