@@ -16,8 +16,8 @@ val scalaTest = "org.scalatest" %% "scalatest" % "3.1.1" % Test
 
 val javaDriverVersion = "3.8.0"
 val javaDriverCore = "com.datastax.cassandra" % "cassandra-driver-core" % javaDriverVersion
-//lagomCassandraEnabled in ThisBuild := false
-//lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "tcp://2703f654-cea5-48e5-98d2-373f2a323d5f-us-east1.db.astra.datastax.com:29042")
+lagomCassandraEnabled in ThisBuild := false
+lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "tcp://b805e6dd-ecc0-4f0d-8205-cde8d7d0b12a-ap-southeast-1.db.astra.datastax.com:29042")
 //lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "http://2703f654-cea5-48e5-98d2-373f2a323d5f-us-east1.db.astra.datastax.com:29080")
 
 lazy val `hello` = (project in file("."))

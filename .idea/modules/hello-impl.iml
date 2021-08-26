@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="hello-impl [file:/Users/davidpark/repo/Lagom-PoC/]" external.linked.project.path="$MODULE_DIR$/../../hello-impl" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="hello-impl [file:/Users/liannelee/IdeaProjects/Tutorials/Lagom-PoC/]" external.linked.project.path="$MODULE_DIR$/../../hello-impl" external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/../../hello-impl/target/scala-2.13/classes" />
     <output-test url="file://$MODULE_DIR$/../../hello-impl/target/scala-2.13/test-classes" />
@@ -16,7 +16,7 @@
     <orderEntry type="module" module-name="hello-api" exported="" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-classic:1.2.3:jar" level="project" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-core:1.2.3:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.datastax.cassandra:cassandra-driver-core:3.7.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.datastax.cassandra:cassandra-driver-core:3.8.0:jar" level="project" />
     <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-annotations:2.11.4:jar" level="project" />
     <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-core:2.11.4:jar" level="project" />
     <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-databind:2.11.4:jar" level="project" />
