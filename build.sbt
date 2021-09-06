@@ -8,14 +8,6 @@ javaOptions in Universal ++= Seq(
   "-Dpidfile.path=/dev/null"
 )
 
-lagomCassandraEnabled in ThisBuild := false
-lagomUnmanagedServices in ThisBuild := Map("cas_native" -> "tcp://localhost:9042")
-
-//
-//lagomKafkaEnabled in ThisBuild := false
-//lagomKafkaAddress in ThisBuild := "localhost:9092"
-//lagomKafkaPropertiesFile in ThisBuild := Some((baseDirectory in ThisBuild).value / "project" / "kafka-server.properties")
-
 val AkkaVersion = "2.6.14"
 val AkkaManagementVersion = "1.1.0"
 
