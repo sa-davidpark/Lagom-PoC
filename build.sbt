@@ -49,6 +49,7 @@ lazy val `hello-stream-api` = (project in file("hello-stream-api"))
       lagomScaladslApi
     )
   )
+  .dependsOn(`hello-api`)
 
 lazy val `hello-stream-impl` = (project in file("hello-stream-impl"))
   .enablePlugins(LagomScala)
@@ -57,6 +58,8 @@ lazy val `hello-stream-impl` = (project in file("hello-stream-impl"))
       lagomScaladslTestKit,
       lagomScaladslAkkaDiscovery,
       lagomScaladslCluster,
+      lagomScaladslPubSub,
+      lagomScaladslKafkaBroker,
       "com.lightbend.akka.management" %% "akka-management-cluster-http" % AkkaManagementVersion,
       "com.lightbend.akka.management" %% "akka-management-cluster-bootstrap" % AkkaManagementVersion,
       "com.lightbend.akka.discovery" %% "akka-discovery-kubernetes-api" % AkkaManagementVersion,

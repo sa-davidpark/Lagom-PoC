@@ -87,12 +87,14 @@ case class HelloState(message: String, timestamp: String) {
 
   private def onGreetingMessageUpgrade(
     cmd: UseGreetingMessage
-  ): ReplyEffect[HelloEvent, HelloState] =
+  ): ReplyEffect[HelloEvent, HelloState] = {
+    println(s"onGreetingMessageUpgrade.......")
     Effect
       .persist(GreetingMessageChanged(cmd.message))
       .thenReply(cmd.replyTo) { _ =>
         Accepted
       }
+  }
 
   private def updateMessage(newMessage: String) =
     copy(newMessage, LocalDateTime.now().toString)

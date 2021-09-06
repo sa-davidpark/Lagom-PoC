@@ -29,6 +29,8 @@ trait HelloService extends Service {
     */
   def useGreeting(id: String): ServiceCall[GreetingMessage, Done]
 
+  def allGreetings(): ServiceCall[NotUsed, Seq[Greeting]]
+
 
   /**
     * This gets published to Kafka.
@@ -41,7 +43,8 @@ trait HelloService extends Service {
     named("hello")
       .withCalls(
         pathCall("/api/hello/:id", hello _),
-        pathCall("/api/hello/:id", useGreeting _)
+        pathCall("/api/hello/:id", useGreeting _),
+        namedCall("/api/greetings", allGreetings)
       )
       .withTopics(
         topic(HelloService.TOPIC_NAME, greetingsTopic _)
@@ -74,8 +77,6 @@ object GreetingMessage {
   implicit val format: Format[GreetingMessage] = Json.format[GreetingMessage]
 }
 
-
-
 /**
   * The greeting message class used by the topic stream.
   * Different than [[GreetingMessage]], this message includes the name (id).
@@ -89,4 +90,13 @@ object GreetingMessageChanged {
     * This will be picked up by a Lagom implicit conversion from Play's JSON format to Lagom's message serializer.
     */
   implicit val format: Format[GreetingMessageChanged] = Json.format[GreetingMessageChanged]
+}
+
+/**
+  * The Greeting is for read-side persistence.
+  */
+case class Greeting(name: String, message: String)
+
+object Greeting {
+  implicit val format: Format[Greeting] = Json.format[Greeting]
 }

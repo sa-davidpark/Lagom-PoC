@@ -10,6 +10,7 @@ import com.lightbend.lagom.scaladsl.playjson.JsonSerializerRegistry
 import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
 import org.example.hello.api.HelloService
+import org.example.hello.impl.readside.{GreetingsProcessor, GreetingsRepository}
 import play.api.libs.ws.ahc.AhcWSComponents
 
 class HelloLoader extends LagomApplicationLoader {
@@ -32,6 +33,10 @@ abstract class HelloApplication(context: LagomApplicationContext)
 
   // Bind the service that this server provides
   override lazy val lagomServer: LagomServer = serverFor[HelloService](wire[HelloServiceImpl])
+
+  lazy val greetingsRepository = wire[GreetingsRepository]
+//  readSide.register[HelloEvent](wire[GreetingsProcessor])
+  readSide.register[HelloEvent](new GreetingsProcessor(cassandraSession, cassandraReadSide))
 
   // Register the JSON serializer registry
   override lazy val jsonSerializerRegistry: JsonSerializerRegistry = HelloSerializerRegistry

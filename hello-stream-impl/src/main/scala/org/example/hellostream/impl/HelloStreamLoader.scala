@@ -1,9 +1,11 @@
 package org.example.hellostream.impl
 
 import com.lightbend.lagom.scaladsl.akka.discovery.AkkaDiscoveryComponents
+import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaClientComponents
 import com.lightbend.lagom.scaladsl.cluster.ClusterComponents
 import com.lightbend.lagom.scaladsl.devmode.LagomDevModeComponents
 import com.lightbend.lagom.scaladsl.playjson.{EmptyJsonSerializerRegistry, JsonSerializerRegistry}
+import com.lightbend.lagom.scaladsl.pubsub.PubSubComponents
 import com.lightbend.lagom.scaladsl.server._
 import com.softwaremill.macwire._
 import org.example.hello.api.HelloService
@@ -24,6 +26,8 @@ class HelloStreamLoader extends LagomApplicationLoader {
 abstract class HelloStreamApplication(context: LagomApplicationContext)
   extends LagomApplication(context)
     with ClusterComponents
+    with LagomKafkaClientComponents
+    with PubSubComponents
     with AhcWSComponents {
 
   // Bind the service that this server provides
