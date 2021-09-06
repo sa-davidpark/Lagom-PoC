@@ -25,6 +25,15 @@ spec:
               containerPort: 2552
             - name: akka-mgmt-http
               containerPort: 8558
+          volumeMounts:
+            - name: config-volume
+              mountPath: /cassandra
+      volumes:
+        - name: config-volume
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: cassandra-config
 ---
 apiVersion: apps/v1
 kind: Deployment

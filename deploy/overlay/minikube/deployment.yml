@@ -9,13 +9,45 @@ spec:
         - name: hello
           env:
             - name: JAVA_OPTS
-              value: "-Dconfig.resource=prod-application.conf"
-            - name: CASSANDRA_SERVICE_NAME
-              value: _cql._tcp.cassandra.default.svc.cluster.local
+              value: "-Dconfig.resource=dev-application.conf"
+#            - name: CASSANDRA_SERVICE_NAME
+#              value: _cql._tcp.cassandra.default.svc.cluster.local
+#            - name: CASSANDRA_USERNAME
+#              value: cassandra
+#            - name: CASSANDRA_PASSWORD
+#              value: wFdniRalR5
+            - name: CASSANDRA_KEYSPACE
+              value: poc
+            - name: CASSANDRA_CONTACT_POINTS
+              value: 3fe7e059-59b6-45a6-86c9-3c6c07e4200c-ap-southeast-1.db.astra.datastax.com:29042
+            - name: CASSANDRA_SESSION_PROVIDER
+              value: akka.persistence.cassandra.ConfigSessionProvider
             - name: CASSANDRA_USERNAME
-              value: cassandra
+              value: tCIsebQSBkxGwnPauDZwHeez
             - name: CASSANDRA_PASSWORD
-              value: wFdniRalR5
+              value: 4ZsDZf2S1gQD1EjxLytwvOvX,gZkc1tGFzbGmkr3U8PwwRQHiUg35Fnaw.P0f_uT-BSAf_2b_Qh8DHfqcIiJDmA4R_hCo+P5U7ax+KWt70vLm5+.9A3T79YMhFtxRtvP
+            - name: CASSANDRA_AUTOCREATE
+              value: "false"
+            - name: CASSANDRA_TRUSTSTORE_PATH
+              value: /cassandra/trustStore.jks
+            - name: CASSANDRA_TRUSTSTORE_PASSWORD
+              value: JoX5jq86szTY7Bx1v
+            - name: CASSANDRA_KEYSTORE_PATH
+              value: /cassandra/identity.jks
+            - name: CASSANDRA_KEYSTORE_PASSWORD
+              value: 8MDWglOs2537ckamP
+            - name: CASSANDRA_JOURNAL_WRITE_CONSISTENCY
+              value: LOCAL_QUORUM
+            - name: CASSANDRA_JOURNAL_READ_CONSISTENCY
+              value: LOCAL_QUORUM
+            - name: CASSANDRA_JOURNAL_BUCKET_SIZE
+              value: Hour
+            - name: CASSANDRA_BATCH_SIZE
+              value: "30"
+            - name: CASSANDRA_SNAPSHOT_WRITE_CONSISTENCY
+              value: LOCAL_QUORUM
+            - name: CASSANDRA_SNAPSHOT_READ_CONSISTENCY
+              value: ONE
             - name: KAFKA_SERVICE_NAME
               value: _tcp-clients._tcp.strimzi-kafka-brokers.kafka.svc.cluster.local
             - name: PLAY_HTTP_SECRET_KEY

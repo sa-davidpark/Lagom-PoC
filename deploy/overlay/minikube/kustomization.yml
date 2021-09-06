@@ -6,3 +6,9 @@ bases:
 
 patchesStrategicMerge:
   - deployment.yml
+
+configMapGenerator:
+  - name: cassandra-config
+    files:
+      - ./cassandra/trustStore.jks
+      - ./cassandra/identity.jks
